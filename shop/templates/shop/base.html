@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}VirtualShop{% endblock %}</title>
+    <link href="{% static "css/css/base.css" %}" rel="stylesheet">
+  </head>
+  <body>
+    <div id="header">
+      <a href="/" class="logo">VirtualShop</a>
+    </div>
+    <div id="subheader">
+      <div class="cart">
+        {% with total_items=cart|length %}
+          {% if total_items > 0 %}
+            Seu carrinho:
+            <a href="{% url "cart:cart_detail" %}">
+              {{ total_items }} item{{ total_items|pluralize }},
+              ${{ cart.get_total_price }}
+            </a>
+          {% elif not order %}
+            Seu carrinho está vázio.
+          {% endif %}
+        {% endwith %}
+      </div>
+    </div>
+    <div id="content">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>
