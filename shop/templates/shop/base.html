@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <title>{% block title %}VirtualShop{% endblock %}</title>
-    <link href="{% static "css/css/base.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'shop/css/base.css' %}">
   </head>
   <body>
     <div id="header">
@@ -15,7 +15,7 @@
         {% with total_items=cart|length %}
           {% if total_items > 0 %}
             Seu carrinho:
-            <a href="{% url "cart:cart_detail" %}">
+            <a href="{% url 'cart:cart_detail' %}">
               {{ total_items }} item{{ total_items|pluralize }},
               ${{ cart.get_total_price }}
             </a>

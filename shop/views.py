@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from .models import Categoria, Produto
 
 
-def prodduto_list(request, categoria_slug=None):
+def produto_list(request, categoria_slug=None):
     categoria = None
     categorias = Categoria.objects.all()
     produtos = Produto.objects.filter(disponivel=True)
