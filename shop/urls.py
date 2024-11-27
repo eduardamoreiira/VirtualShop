@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 app_name = 'shop'
 
@@ -12,9 +13,10 @@ urlpatterns = [
         views.produto_list,
         name='produto_list_por_categoria'
     ),
-    path(
-        '<int:id>/<slug:slug/',
-        views.produto_detalhe, 
-        name='produto_detalhe'
-    ),
+
+    path('<int:id>/<slug:slug>/', views.produto_detalhe, name='produto_detalhe')
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

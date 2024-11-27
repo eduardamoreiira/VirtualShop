@@ -8,7 +8,8 @@ class Cart:
         cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
             #Salva um carrinho vazio na sessão browser
-            cart = self.session(settings.CART_SESSION_ID) = {}
+            self.session[settings.CART_SESSION_ID] = {}
+            cart = self.session[settings.CART_SESSION_ID]
         self.cart = cart
     
     def add(self, produto, quantidade =1, override_quantidade = False):

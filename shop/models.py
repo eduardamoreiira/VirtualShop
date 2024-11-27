@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-# Create your models here.
+
 class Categoria(models.Model):
     nome = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
@@ -33,8 +33,11 @@ class Produto(models.Model):
     slug=models.SlugField(max_length=200)
     imagem=models.ImageField(
         upload_to='produtos/%Y/%m/$d',
-        blank=True
+        blank=True,
+        null=True
     )
+   
+
     descricao=models.TextField(blank=True)
     preco=models.DecimalField(max_digits=10, decimal_places=2)
     disponivel=models.BooleanField(default=True)
@@ -57,5 +60,10 @@ class Produto(models.Model):
             return reverse(
                 'shop:produto_detalhe', args=[self.id, self.slug]
             )
+    
+    def get_absolute_url(self):
+        return reverse(
+            'shop:produto_detalhe', args=[self.id, self.slug]
+        )
 
 
