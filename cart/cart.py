@@ -34,9 +34,9 @@ class Cart:
     def __iter__(self):
         produto_ids = self.cart.keys()
         produtos = Produto.objects.filter(id__in = produto_ids)
-        cart = self.cart.cpy()
+        cart = self.cart.copy()
         for produto in produtos:
-            cart[str(produto.id)] ['produto'] = produto
+            cart[str(produto.id)]['produto'] = produto
         for item in cart.values():
             item['preco'] = Decimal(item['preco'])
             item['preco_total'] = item['preco'] * item['quantidade']

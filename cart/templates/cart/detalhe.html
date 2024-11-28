@@ -20,44 +20,45 @@ Carrinho de Compras
     </thead>
     <tbody>
       {% for item in cart %}
-        {% with product=item.produto %}
+        {% with produto=item.produto %}
           <tr>
             <td>
-              <a href="{{ product.get_absolute_url }}">
-                <img src="{% if product.image %}{{ product.image.url }}
+              <a href="{{ produto.get_absolute_url }}">
+                <img src="{% if produto.imagem %}{{ produto.imagem.url }}
                 {% else %}{% static 'img/no_image.png' %}{% endif %}">
               </a>
             </td>
-            <td>{{ product.name }}</td>
+            <td>{{ produto.nome }}</td>
             <td>
-              <form action="{% url 'cart:cart_add' product.id %}" method="post">
-                {{ item.update_quantity_form.quantity }}
-                {{ item.update_quantity_form.override }}
+              <form action="{% url 'cart:cart_adicionar' produto.id %}" method="post">
+                {{ item.atualizar_quantidade_form.quantidade }}
+                {{ item.atualizar_quantidade_form.override }}
                 <input type="submit" value="Update">
                 {% csrf_token %}
               </form>
             </td>
             <td>
-              <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+              <form action="{% url 'cart:cart_remover' produto.id %}" method="post">
                 <input type="submit" value="Remove">
                 {% csrf_token %}
               </form>
             </td>
-            <td class="num">${{ item.price }}</td>
-            <td class="num">${{ item.total_price }}</td>
+            <td class="num">${{ item.preco }}</td>
+            <td class="num">${{ item.preco_total }}</td>
           </tr>
         {% endwith %}
       {% endfor %}
       <tr class="total">
         <td>Total</td>
         <td colspan="4"></td>
-        <td class="num">${{ cart.get_total_price }}</td>
+        <td class="num">${{ cart.get_preco_total }}</td>
       </tr>
     </tbody>
   </table>
   <p class="text-right">
-    <a href="{% url 'shop:product_list' %}" class="button
+    <a href="{% url 'shop:produto_list' %}" class="button
     light">Continuar comprando</a>
     <a href="#" class="button">Checkout</a>
   </p>
+
 {% endblock %}
