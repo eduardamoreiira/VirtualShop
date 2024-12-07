@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div clas="col-md-6">
+            <h2 class="text-center mb-4"> Cadastrar Usuário:</h2>
+            <form action="signUp" method="POST"></form>
+            {% csrf_token %}
+            <div class="form-group"></div>
+            <label for="inputUserName">Nome do Usuário</label>
+            <input type="text" class="form-control" id="inputUsername" placeholder="Nome do Usuário" name="username" required>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
