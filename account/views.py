@@ -39,7 +39,7 @@ def signIn(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = aauthenticate(username=username, password=password) #verifica se o usuário possui cadastro
+        user = authenticate(username=username, password=password) #verifica se o usuário possui cadastro
         if user is not None:
             login(request, user)
             request.session['username'] = username
